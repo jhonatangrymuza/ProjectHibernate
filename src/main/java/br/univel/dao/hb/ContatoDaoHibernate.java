@@ -10,6 +10,9 @@ import br.univel.dao.ContatoDaoIF;
 public class ContatoDaoHibernate implements ContatoDaoIF {
 	
 	
+	private Session session;
+	
+	
 	public ContatoDaoHibernate() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -29,7 +32,14 @@ public class ContatoDaoHibernate implements ContatoDaoIF {
 
 	@Override
 	public void atualiza(int id, Contato c) {
-		// TODO Auto-generated method stub
+	
+		session.beginTransaction();
+
+		session.getTransaction().commit();
+
+		session.close();
+
+		HibernateUtil.finalizar();
 		
 	}
 
